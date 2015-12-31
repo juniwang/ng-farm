@@ -1,1 +1,1 @@
-var app = angular.module('ForecastApp', []);
+var app = angular.module('FarmApp', ['ngRoute']);

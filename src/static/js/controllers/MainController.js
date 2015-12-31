@@ -1,5 +1,4 @@
 app.controller('MainController', ['$scope', function($scope) {
-    $scope.title='Top 5 Sellers';
     $scope.seeds = [
         {
             "name": "Nexus S",
