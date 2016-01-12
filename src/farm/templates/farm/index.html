@@ -9,8 +9,6 @@
         <title>Farm Assistant</title>
 
         <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-        <script src="/static/js/shared/google.maps.js"></script>
-        <script src="/static/js/shared/ngAutocomplete.js"></script>
         <script src="/static/js/shared/angular.min.js"></script>
         <script src="/static/js/shared/angular-route.min.js"></script>
 
@@ -55,18 +53,21 @@
                     </div>
                 </div>
                 <div class="table-responsive" ng-show="isActive('/plant')">
+                    <div class="text-right">
+                        <button type="button" class="btn btn-info" ng-click="view_all()">{[ viewText ]}</button>
+                    </div>
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr class="row">
-                                <th class="col-md-5">种子</th>
-                                <th class="col-md-3">数量</th>
+                                <th class="col-md-4">种子</th>
+                                <th class="col-md-4">数量</th>
                                 <th class="col-md-4">#</th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="seed in plants track by seed.name">
                             <tr class="row">
-                                <td class="col-md-5">{[ seed.name ]}</td>
-                                <td class="col-md-3">{[ seed.number ]}</td>
+                                <td class="col-md-4">{[ seed.name ]}</td>
+                                <td class="col-md-4">{[ seed.number ]}</td>
                                 <td class="col-md-4">
                                   <button class="btn btn-success" ng-click="complete_seed(seed.name)"> 
                                     完成

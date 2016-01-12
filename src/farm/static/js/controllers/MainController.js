@@ -34,10 +34,12 @@ app.controller('MainController', ['$scope', 'ses', '$location', "$timeout", func
         $scope.alerts.splice(index, 1);
     };
 
+    var set_plants = function(data){
+        $scope.plants = data
+    }
+
     var reload = function(){
-        ses.getSeedList().success(function(data){
-            $scope.plants = data
-        });
+        ses.getSeedList().success(set_plants);
 
         ses.getRecylceList().success(function(data){
             $scope.sells = data
@@ -48,6 +50,20 @@ app.controller('MainController', ['$scope', 'ses', '$location', "$timeout", func
         $scope.seedName = ""
         $scope.seedNumber = "-1"
     }
+
+    var all = false
+    $scope.viewText = "more"
+    $scope.view_all = function(){
+        if(all){
+            ses.getSeedList().success(set_plants)
+            all = false
+            $scope.viewText = "more"
+        }else{
+            ses.getAllSeeds().success(set_plants)
+            all = true
+            $scope.viewText = "less"
+        }
+    };
 
     $scope.delete_seed = function(name){
         return ses.del(name).success(function(data){
