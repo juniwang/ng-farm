@@ -34,36 +34,46 @@ app.controller('MainController', ['$scope', 'ses', '$location', "$timeout", func
         $scope.alerts.splice(index, 1);
     };
 
-    var set_plants = function(data){
-        $scope.plants = data
+    var set_seeds = function(data){
+        $scope.seeds = data
+    }
+
+    var current = "plants"
+
+    var load_plants = function(){
+        current = "plants"
+        ses.getSeedList().success(set_seeds);
+    }
+
+    var load_sells = function(){
+        current = "sells"
+        ses.getRecylceList().success(set_seeds);
+    }
+
+    var load_all = function(){
+        current = "all"
+        ses.getAllSeeds().success(set_seeds)
     }
 
     var reload = function(){
-        ses.getSeedList().success(set_plants);
-
-        ses.getRecylceList().success(function(data){
-            $scope.sells = data
-        });
+        if(current=="plants"){
+            load_plants()
+        }else if(current=="sells"){
+            load_sells()
+        }else{
+            load_all()
+        }
     }
+
 
     var reset_form = function(){
         $scope.seedName = ""
         $scope.seedNumber = "-1"
     }
 
-    var all = false
-    $scope.viewText = "more"
-    $scope.view_all = function(){
-        if(all){
-            ses.getSeedList().success(set_plants)
-            all = false
-            $scope.viewText = "more"
-        }else{
-            ses.getAllSeeds().success(set_plants)
-            all = true
-            $scope.viewText = "less"
-        }
-    };
+    $scope.view_all = load_all
+    $scope.view_plants = load_plants
+    $scope.view_sells = load_sells
 
     $scope.delete_seed = function(name){
         return ses.del(name).success(function(data){
