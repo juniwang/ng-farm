@@ -23,12 +23,6 @@
 
         <div class="container-fluid"  ng-controller="MainController">
             <div class="main">
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li ng-class="{ active: isActive('/plant') }"><a href="#/plant">种植</a></li>
-                        <li ng-class="{ active: isActive('/recycle') }"><a href="#/recycle">回收</a></li>
-                    </ul>
-                </div>
                 <div>
                     <form name="myForm" class="form-inline">
                         <div class="form-group has-feedback">
@@ -52,10 +46,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive" ng-show="isActive('/plant')">
-                    <div class="text-right">
+                <div class="collapse navbar-collapse m-t-5" style="padding-top:20px">
+                    <ul class="nav navbar-nav">
+                        <a class="btn btn-info" href="#/plant">种植</a>
+                        <a class="btn btn-info" href="#/recycle">回收</a>
                         <button type="button" class="btn btn-info" ng-click="view_all()">{[ viewText ]}</button>
-                    </div>
+                    </ul>
+                </div>
+                <div class="table-responsive" ng-show="isActive('/plant')">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr class="row">
