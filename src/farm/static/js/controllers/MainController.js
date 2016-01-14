@@ -53,10 +53,24 @@ app.controller('MainController', ['$scope', 'ses', '$location', "$timeout", func
         })
     }
 
+    $scope.cur = 1
+
+    var set_seeds = function(){
+        if($scope.cur==1){
+            $scope.seeds = $scope.plants
+        }else if($scope.cur==2){
+            $scope.seeds = $scope.sells
+        }else{
+            $scope.seeds = $scope.all_seeds
+        }
+    }
+
     var reload = function(){
         load_plants()
         load_sells()
-        load_all()
+        load_all().success(function(){
+            set_seeds()
+        })
     }
 
 
@@ -66,15 +80,18 @@ app.controller('MainController', ['$scope', 'ses', '$location', "$timeout", func
     }
 
     $scope.view_all = function(){
-        $scope.seeds = $scope.all_seeds
+        $scope.cur = 3
+        set_seeds()
     }
 
     $scope.view_plants = function(){
-        $scope.seeds = $scope.plants
+        $scope.cur = 1
+        set_seeds()
     }
 
     $scope.view_sells = function(){
-        $scope.seeds = $scope.sells
+        $scope.cur = 2
+        set_seeds()
     }
 
     $scope.delete_seed = function(name){
@@ -114,9 +131,5 @@ app.controller('MainController', ['$scope', 'ses', '$location', "$timeout", func
         })
     };
 
-    load_plants().success(function(data){
-        $scope.seeds = data
-    })
-    load_sells()
-    load_all()
+    reload()
 }]);
