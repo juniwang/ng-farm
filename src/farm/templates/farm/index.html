@@ -38,13 +38,15 @@
                         <button type="submit" class="btn btn-primary" ng-click="update_seed_in_form()" ng-disabled="myForm.seedName.$dirty && myForm.seedName.$invalid">提交</button>
                         <button type="button" class="btn btn-danger" ng-click="del_in_form()" ng-disabled="myForm.seedName.$dirty && myForm.seedName.$invalid">删除</button>
                     </form>
+                    {%raw%}
                     <div class="alertContainer" ng-repeat='alert in alerts track by $index'>
-                        <div class="alert alert-{[alert.type]}">
+                        <div class="alert alert-{{ alert.type }}">
                             <button type="button" class="close" close='closeAlert($index)'>x</button>
-                            <strong>{[alert.type]}! </strong>
-                             {[alert.msg]}
+                            <strong>{{ alert.type }}! </strong>
+                             {{ alert.msg }}
                         </div>
                     </div>
+                    {%endraw%}
                 </div>
                 <div style="padding-top:20px">
                     <ul>
@@ -62,10 +64,11 @@
                                 <th class="col-md-4">#</th>
                             </tr>
                         </thead>
+                        {%raw%}
                         <tbody ng-repeat="seed in seeds track by seed.name">
                             <tr class="row">
-                                <td class="col-md-4">{[ seed.name ]}</td>
-                                <td class="col-md-4">{[ seed.number ]}</td>
+                                <td class="col-md-4">{{ seed.name }}</td>
+                                <td class="col-md-4">{{ seed.number }}</td>
                                 <td class="col-md-4">
                                   <button class="btn btn-success" ng-click="complete_seed(seed.name)"> 
                                     完成
@@ -76,6 +79,7 @@
                                 </td>
                             </tr>
                         </tbody>
+                        {%endraw%}
                     </table>
                 </div>              
             </div>

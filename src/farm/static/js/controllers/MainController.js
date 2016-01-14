@@ -36,19 +36,19 @@ app.controller('MainController', ['$scope', 'ses', '$location', "$timeout", func
 
 
     var load_plants = function(){
-        ses.getSeedList().success(function(data){
+        return ses.getSeedList().success(function(data){
             $scope.plants = data
         });
     }
 
     var load_sells = function(){
-        ses.getRecylceList().success(function(data){
+        return ses.getRecylceList().success(function(data){
             $scope.sells = data
         });
     }
 
     var load_all = function(){
-        ses.getAllSeeds().success(function(data){
+        return ses.getAllSeeds().success(function(data){
             $scope.all_seeds = data
         })
     }
@@ -114,6 +114,9 @@ app.controller('MainController', ['$scope', 'ses', '$location', "$timeout", func
         })
     };
 
-    reload();
-    $scope.view_plants()
+    load_plants().success(function(data){
+        $scope.seeds = data
+    })
+    load_sells()
+    load_all()
 }]);
